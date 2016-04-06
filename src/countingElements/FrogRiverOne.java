@@ -25,7 +25,7 @@ class FrogRiverOne {
 
 	public static void main(String args[]) {
 
-		// should print 4
+		// should print 6
 
 		int X = 5;
 		int A[] = { 1, 3, 1, 4, 2, 3, 5, 4 };
