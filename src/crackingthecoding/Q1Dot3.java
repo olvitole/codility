@@ -15,31 +15,42 @@ public class Q1Dot3 {
 		String testString2 = "132A";
 		System.out.println("\n Test " + testString + "  " + testString2);
 		System.out.println(isPermutation(testString, testString2));
+		System.out.println(permutation(testString, testString2));
+		System.out.println(permutation2(testString, testString2));
 
-		
 		testString = "";
 		testString2 = "";
 		System.out.println("\n Test " + testString + "  " + testString2);
 		System.out.println(isPermutation(testString, testString2));
-		
+		System.out.println(permutation(testString, testString2));
+		System.out.println(permutation2(testString, testString2));
+
 		testString = "12";
 		testString2 = "123";
 		System.out.println("\n Test " + testString + "  " + testString2);
 		System.out.println(isPermutation(testString, testString2));
-		
+		System.out.println(permutation(testString, testString2));
+		System.out.println(permutation2(testString, testString2));
+
 		testString = "1";
 		testString2 = "1111";
 		System.out.println("\n Test " + testString + "  " + testString2);
 		System.out.println(isPermutation(testString, testString2));
-		
+		System.out.println(permutation(testString, testString2));
+		System.out.println(permutation2(testString, testString2));
+
 		testString = "1122";
 		testString2 = "1111";
 		System.out.println("\n Test " + testString + "  " + testString2);
 		System.out.println(isPermutation(testString, testString2));
-		
+		System.out.println(permutation(testString, testString2));
+		System.out.println(permutation2(testString, testString2));
+
 	}
 
 	public static boolean isPermutation(String str, String str2) {
+
+		// missed optimization on checking the length
 
 		// key count
 		HashMap<Character, Integer> mapInventoryStr = countInventory(str);
@@ -79,20 +90,59 @@ public class Q1Dot3 {
 	// check if values match
 	private static boolean checkMatch(HashMap<Character, Integer> mapInventory,
 			HashMap<Character, Integer> mapInventory2) {
-		
-		for(Character c : mapInventory.keySet()){
-			if (mapInventory2.containsKey(c)){
+
+		for (Character c : mapInventory.keySet()) {
+			if (mapInventory2.containsKey(c)) {
 				int val1 = mapInventory.get(c);
 				int val2 = mapInventory2.get(c);
-				if (val1!=val2){
+				if (val1 != val2) {
 					return false;
 				}
-			}else
+			} else
 				return false;
 		}
-		
-		return true;
 
+		return true;
+	}
+
+	/// solution as follows
+	// Way 1
+	
+	private static String sort(String s) {
+		char[] content = s.toCharArray();
+		java.util.Arrays.sort(content);
+		return new String(content);
+	}
+
+	public static boolean permutation(String s, String t) {
+		if (s.length() != t.length()) {
+			return false;
+		}
+		return sort(s).equals(sort(t));
+	}
+
+	
+	// Way 2
+	public static boolean permutation2(String s, String t) {
+		if (s.length() != t.length()) {
+			return false;
+		}
+
+		int[] letters = new int[256]; // Assumption
+
+		char[] s_array = s.toCharArray();
+		for (char c : s_array) { // count number of each char in s.
+			letters[c]++;
+		}
+
+		for (int i = 0; i < t.length(); i++) {
+			int c = (int) t.charAt(i);
+			if (--letters[c] < 0) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }
