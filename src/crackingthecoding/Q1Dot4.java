@@ -1,10 +1,5 @@
 package crackingthecoding;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 /**
  * Write a method to replace all spaces in a string with'%20'.
  * 
@@ -31,18 +26,22 @@ public class Q1Dot4 {
 			String str = "A A A A";
 			System.out.println("\n Test " + str);
 			System.out.println(addPct20(str.toCharArray()));
+			// replaceSpaces(str.toCharArray(), str.length());
 
 			str = "   ";
 			System.out.println("\n Test " + str);
 			System.out.println(addPct20(str.toCharArray()));
+			// replaceSpaces(str.toCharArray(), str.length());
 
 			str = "";
 			System.out.println("\n Test " + str);
 			System.out.println(addPct20(str.toCharArray()));
+			// replaceSpaces(str.toCharArray(), str.length());
 
 			str = "AAA";
 			System.out.println("\n Test " + str);
 			System.out.println(addPct20(str.toCharArray()));
+			// replaceSpaces(str.toCharArray(), str.length());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,6 +96,33 @@ public class Q1Dot4 {
 			if (strs[i] == TO_REPLACE_CHAR)
 				count++;
 		return count;
+	}
+
+	// solution in c will not run in java copide for documentation purposes
+
+	public static void replaceSpaces(char[] str, int length) {
+		int spaceCount = 0, newLength, i;
+		for (i = 0; i < length; i++) {
+
+			if (str[i] == ' ') {
+				spaceCount++;
+			}
+		}
+		newLength = length + spaceCount * 2;
+		str[newLength] = '\0';
+		for (i = length - 1; i >= 0; i--) {
+			if (str[i] == ' ') {
+				str[newLength - 1] = '0';
+				str[newLength - 2] = '2';
+				str[newLength - 3] = '%';
+				newLength = newLength - 3;
+			} else {
+				str[newLength - 1] = str[i];
+				newLength = newLength - 1;
+			}
+		}
+
+		System.out.println(str);
 	}
 
 }
