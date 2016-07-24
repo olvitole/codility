@@ -15,9 +15,6 @@ public class Q1Dot7 {
 
 	public static void main(String args[]) {
 
-		// note compress bad does not handle one of the conditions where
-		// the compressed string should not be greater than the original
-
 		// special cases
 		int matrix[][] = { { 1, 2, 3, 4 }, { 4, 5, 0, 7 }, { 7, 8, 9, 1 } };
 		System.out.println("\n Test ");
