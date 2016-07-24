@@ -12,18 +12,19 @@ public class Q1Dot8 {
 
 	public static void main(String args[]) {
 
-		// special cases
 		String s1 = "olvi";
 		String s2 = "viol";
 		System.out.println("\n Test ");
 		System.out.println("s1: " + s1 + " s2: " + s2);
 		System.out.println(isRotation(s1, s2));
+		System.out.println(isRotation2(s1, s2));
 
 		s1 = "olvi";
 		s2 = "ivol";
 		System.out.println("\n Test ");
 		System.out.println("s1: " + s1 + " s2: " + s2);
 		System.out.println(isRotation(s1, s2));
+		System.out.println(isRotation2(s1, s2));
 
 	}
 
@@ -33,14 +34,27 @@ public class Q1Dot8 {
 			return true;
 		if (s1 == null || s2 == null)
 			return false; // note if both, was handled above
-		
+
 		if (s1.length() != s2.length())
 			return false;
-		return isSubstring(s1, s2 + s2);
+		return isSubstring(s2 + s2, s1);
 
 	}
 
-	public static boolean isSubstring(String substring, String string) {
+	// book
+
+	public static boolean isRotation2(String s1, String s2) {
+		int len = s1.length();
+		/* check that si and s2 are equal length and not empty */
+		if (len == s2.length() && len > 0) {
+			/* concatenate si and si within new buffer */
+			String slsl = s1 + s1;
+			return isSubstring(slsl, s2);
+		}
+		return false;
+	}
+
+	public static boolean isSubstring(String string, String substring) {
 		return string.contains(substring);
 	}
 
