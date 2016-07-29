@@ -17,4 +17,11 @@ public class LinkedListNode {
 		n.next = end;
 	}
 
+	@Override
+	public String toString() {
+		return "LinkedListNode [next=" + next + ", data=" + data + "]";
+	}
+	
+	
+
 }
