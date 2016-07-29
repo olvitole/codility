@@ -23,6 +23,11 @@ public class Q2Dot1 {
 		print(nd);
 		deleteDups(nd);
 		print(nd);
+
+		nd.appendToTail(5);
+		print(nd);
+		deleteDupsII(nd);
+		print(nd);
 	}
 
 	public static void deleteDups(Node n) {
@@ -37,6 +42,26 @@ public class Q2Dot1 {
 				previous = n;
 			}
 			n = n.next;
+		}
+	}
+	
+	// no buffer table to check against need to loop through
+	public static void deleteDupsII(Node head) {
+		if (head == null)
+			return;
+
+		Node current = head;
+		while (current != null) {
+			/* Remove all future nodes that have the same value */
+			Node runner = current;
+			while (runner.next != null) {
+				if (runner.next.data == current.data) {
+					runner.next = runner.next.next;
+				} else {
+					runner = runner.next;
+				}
+			}
+			current = current.next;
 		}
 	}
 
