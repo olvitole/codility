@@ -14,6 +14,8 @@ import crackingthecoding.misc.LinkedListNode;
 
 public class Q2Dot5 {
 
+	private static final int BASE = 10;
+
 	public static void main(String args[]) {
 
 		LinkedListNode numberOne = new LinkedListNode(1);
@@ -28,7 +30,10 @@ public class Q2Dot5 {
 		print(numberTwo);
 
 		LinkedListNode added = addNumbers(numberOne, numberTwo);
+		print(added);
 
+		System.out.println("Second");
+		added = addNumbersII(numberOne, numberTwo);
 		print(added);
 
 	}
@@ -73,6 +78,8 @@ public class Q2Dot5 {
 		if (two == null)
 			return one;
 
+		int inMind = 0;
+
 		while (one != null || two != null) {
 			int sum = 0;
 			if (one != null && two != null) {
@@ -89,14 +96,59 @@ public class Q2Dot5 {
 				}
 			}
 
+			int newSum = sum;
+			if (newSum > BASE) {
+				newSum = sum % BASE;
+			}
+
 			if (added == null) {
-				added = new LinkedListNode(sum);
-			} else
-				added.appendToTail(sum);
+				added = new LinkedListNode(newSum + inMind);
+			} else {
+				added.appendToTail(newSum + inMind);
+			}
+			inMind = sum / BASE;
 		}
 
 		return added;
 
+	}
+
+	// this one the order is reversed so we can just reverse the linked list
+	// and reuse the method created above for addition.
+	public static LinkedListNode addNumbersII(LinkedListNode one, LinkedListNode two) {
+
+		LinkedListNode oneR = reverse(one);
+		LinkedListNode twoR = reverse(two);
+
+		return addNumbers(oneR, twoR);
+	}
+
+	private static LinkedListNode reverse(LinkedListNode node) {
+
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		LinkedListNode remaining = reverse(node.next);
+		node.next.next = node;
+		node.next = null;
+		return remaining;
+
+	}
+
+	public static LinkedListNode reverseII(LinkedListNode currentNode) {
+		// For first node, previousNode will be null
+		LinkedListNode previousNode = null;
+		LinkedListNode nextNode;
+		while (currentNode != null) {
+			nextNode = currentNode.next;
+			// reversing the link
+			currentNode.next = previousNode;
+			// moving currentNode and previousNode by 1 node
+			previousNode = currentNode;
+			currentNode = nextNode;
+		}
+		return previousNode;
 	}
 
 }
