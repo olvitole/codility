@@ -1,16 +1,16 @@
 package crackingthecoding.misc;
 
-public class Node {
-	public Node next = null;
+public class LinkedListNode {
+	public LinkedListNode next = null;
 	public int data;
 
-	public Node(int d) {
+	public LinkedListNode(int d) {
 		data = d;
 	}
 
 	public void appendToTail(int d) {
-		Node end = new Node(d);
-		Node n = this;
+		LinkedListNode end = new LinkedListNode(d);
+		LinkedListNode n = this;
 		while (n.next != null) {
 			n = n.next;
 		}

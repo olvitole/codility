@@ -1,6 +1,6 @@
 package crackingthecoding;
 
-import crackingthecoding.misc.Node;
+import crackingthecoding.misc.LinkedListNode;
 
 /**
  * 2.2 Implement an algorithm to find the kth to last element of a singly linked
@@ -11,7 +11,7 @@ public class Q2Dot2 {
 
 	public static void main(String args[]) {
 
-		Node nd = new Node(1);
+		LinkedListNode nd = new LinkedListNode(1);
 		nd.appendToTail(1);
 		nd.appendToTail(2);
 		nd.appendToTail(3);
@@ -34,7 +34,7 @@ public class Q2Dot2 {
 
 		System.out.println("C: ");
 		Q2Dot2 x = new Q2Dot2();
-		Node foundNd = x.nthToLastR2(nd, n, x.new IntWrapper());
+		LinkedListNode foundNd = x.nthToLastR2(nd, n, x.new IntWrapper());
 		System.out.println(foundNd.data);
 
 		System.out.println("D: ");
@@ -43,7 +43,7 @@ public class Q2Dot2 {
 
 	}
 
-	public static int findNToLast(Node nd, int n) {
+	public static int findNToLast(LinkedListNode nd, int n) {
 
 		if (nd == null) {
 			return 0;
@@ -68,7 +68,7 @@ public class Q2Dot2 {
 		return nd.data;
 	}
 
-	private static int findLenght(Node nd) {
+	private static int findLenght(LinkedListNode nd) {
 		int ln = 0;
 
 		while (nd != null) {
@@ -81,7 +81,7 @@ public class Q2Dot2 {
 
 	// solved
 	// A
-	public static int nthToLast(Node head, int k) {
+	public static int nthToLast(LinkedListNode head, int k) {
 		if (head == null) {
 			return 0;
 		}
@@ -92,7 +92,7 @@ public class Q2Dot2 {
 		return i;
 	}
 
-	public static void print(Node n) {
+	public static void print(LinkedListNode n) {
 		while (n != null) {
 			System.out.print(n.data + " ");
 
@@ -107,11 +107,11 @@ public class Q2Dot2 {
 		public int value = 0;
 	}
 
-	public static Node nthToLastR2(Node head, int k, IntWrapper i) {
+	public static LinkedListNode nthToLastR2(LinkedListNode head, int k, IntWrapper i) {
 		if (head == null) {
 			return null;
 		}
-		Node node = nthToLastR2(head.next, k, i);
+		LinkedListNode node = nthToLastR2(head.next, k, i);
 		i.value = i.value + 1;
 		if (i.value == k) { // We've found the kth element
 			return head;
@@ -120,12 +120,12 @@ public class Q2Dot2 {
 	}
 
 	// solution D
-	public static Node nthToLastD(Node head, int k) {
+	public static LinkedListNode nthToLastD(LinkedListNode head, int k) {
 		if (k <= 0)
 			return null;
 
-		Node p1 = head;
-		Node p2 = head;
+		LinkedListNode p1 = head;
+		LinkedListNode p2 = head;
 
 		// Move p2 -forward k nodes into the list.
 		for (int i = 0; i < k - 1; i++) {

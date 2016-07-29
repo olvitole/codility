@@ -2,7 +2,7 @@ package crackingthecoding;
 
 import java.util.Hashtable;
 
-import crackingthecoding.misc.Node;
+import crackingthecoding.misc.LinkedListNode;
 
 /**
  * Write code to remove duplicates from an unsorted linked list. FOLLOW UP How
@@ -13,7 +13,7 @@ public class Q2Dot1 {
 
 	public static void main(String args[]) {
 
-		Node nd = new Node(1);
+		LinkedListNode nd = new LinkedListNode(1);
 		nd.appendToTail(1);
 		nd.appendToTail(2);
 		nd.appendToTail(3);
@@ -30,9 +30,9 @@ public class Q2Dot1 {
 		print(nd);
 	}
 
-	public static void deleteDups(Node n) {
+	public static void deleteDups(LinkedListNode n) {
 		Hashtable table = new Hashtable();
-		Node previous = null;
+		LinkedListNode previous = null;
 		while (n != null) {
 			System.out.println(n.data);
 			if (table.containsKey(n.data)) {
@@ -46,14 +46,14 @@ public class Q2Dot1 {
 	}
 	
 	// no buffer table to check against need to loop through
-	public static void deleteDupsII(Node head) {
+	public static void deleteDupsII(LinkedListNode head) {
 		if (head == null)
 			return;
 
-		Node current = head;
+		LinkedListNode current = head;
 		while (current != null) {
 			/* Remove all future nodes that have the same value */
-			Node runner = current;
+			LinkedListNode runner = current;
 			while (runner.next != null) {
 				if (runner.next.data == current.data) {
 					runner.next = runner.next.next;
@@ -65,7 +65,7 @@ public class Q2Dot1 {
 		}
 	}
 
-	public static void print(Node n) {
+	public static void print(LinkedListNode n) {
 		while (n != null) {
 			System.out.print(n.data + " ");
 
