@@ -23,6 +23,8 @@ public class Q2Dot3 {
 		print(nd);
 		deleteNode(nd);
 		print(nd);
+		deleteNodeS(nd);
+		print(nd);
 
 		LinkedListNode nd2 = null;
 		System.out.println();
@@ -51,6 +53,17 @@ public class Q2Dot3 {
 		nd.data = nd.next.data;
 		nd.next = nd.next.next;
 
+	}
+
+	// Solved
+
+	public static boolean deleteNodeS(LinkedListNode n) {
+		if (n == null || n.next == null) {
+			return false; // Failure
+		}
+		n.data = n.next.data;
+		n.next = n.next.next;
+		return true;
 	}
 
 	public static void print(LinkedListNode n) {
