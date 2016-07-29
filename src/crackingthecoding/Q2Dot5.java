@@ -36,6 +36,10 @@ public class Q2Dot5 {
 		added = addNumbersII(numberOne, numberTwo);
 		print(added);
 
+		System.out.println("Book ");
+		added = addLists(numberOne, numberTwo, 0);
+		print(added);
+
 	}
 
 	private static void append(LinkedListNode nd) {
@@ -151,6 +155,36 @@ public class Q2Dot5 {
 			currentNode = nextNode;
 		}
 		return previousNode;
+	}
+
+	// Solution A
+
+	public static LinkedListNode addLists(LinkedListNode l1, LinkedListNode l2, int carry) {
+		/* We're done if both lists are null AND the carry value is 0 */
+		if (l1 == null && l2 == null && carry == 0) {
+			return null;
+		}
+
+		LinkedListNode result = new LinkedListNode(carry);
+
+		/* Add value, and the data from i1 and i2 */
+		int value = carry;
+		if (l1 != null) {
+			value += l1.data;
+		}
+		if (l2 != null) {
+			value += l2.data;
+		}
+
+		result.data = value % 10; /* Second digit of number */
+
+		/* Recurse */
+		if (l1 != null || l2 != null) {
+			LinkedListNode more = addLists(l1 == null ? null : l1.next, l2 == null ? null : l2.next,
+					value >= 10 ? 1 : 0);
+			result.next = more;
+		}
+		return result;
 	}
 
 }
