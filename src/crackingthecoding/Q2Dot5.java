@@ -51,7 +51,7 @@ public class Q2Dot5 {
 	private static void append2(LinkedListNode nd) {
 		nd.appendToTail(1);
 		nd.appendToTail(6);
-		nd.appendToTail(3);
+		nd.appendToTail(6);
 
 	}
 
@@ -96,15 +96,16 @@ public class Q2Dot5 {
 				}
 			}
 
+			sum += inMind;
 			int newSum = sum;
-			if (newSum > BASE) {
+			if (newSum >= BASE) {
 				newSum = sum % BASE;
 			}
 
 			if (added == null) {
-				added = new LinkedListNode(newSum + inMind);
+				added = new LinkedListNode(newSum);
 			} else {
-				added.appendToTail(newSum + inMind);
+				added.appendToTail(newSum);
 			}
 			inMind = sum / BASE;
 		}
@@ -119,7 +120,8 @@ public class Q2Dot5 {
 
 		LinkedListNode oneR = reverse(one);
 		LinkedListNode twoR = reverse(two);
-
+		print(oneR);
+		print(twoR);
 		return addNumbers(oneR, twoR);
 	}
 
