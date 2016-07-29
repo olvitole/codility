@@ -12,7 +12,40 @@ public class Q2Dot4 {
 
 	public static void main(String args[]) {
 
+		int x = 4;
+
 		LinkedListNode nd = new LinkedListNode(1);
+		append(nd);
+
+		System.out.println();
+		System.out.println("One: ");
+		print(nd);
+		partition(nd, x);
+		print(nd);
+
+		// test for book
+		nd = new LinkedListNode(1);
+		append(nd);
+
+		System.out.println();
+		System.out.println("Book: ");
+		print(nd);
+		LinkedListNode ndR = partitionS(nd, x);
+		print(ndR);
+
+		// test for book B
+		nd = new LinkedListNode(1);
+		append(nd);
+
+		System.out.println();
+		System.out.println("Book B: ");
+		print(nd);
+		ndR = partitionSII(nd, x);
+		print(ndR);
+
+	}
+
+	private static void append(LinkedListNode nd) {
 		nd.appendToTail(1);
 		nd.appendToTail(5);
 		nd.appendToTail(3);
@@ -20,14 +53,6 @@ public class Q2Dot4 {
 		nd.appendToTail(5);
 		nd.appendToTail(6);
 		nd.appendToTail(4);
-
-		System.out.println();
-		System.out.println("One: ");
-		print(nd);
-		int x = 4;
-		partition(nd, x);
-		print(nd);
-
 	}
 
 	public static void partition(LinkedListNode nd, int x) {
@@ -75,6 +100,89 @@ public class Q2Dot4 {
 		}
 		System.out.println();
 		System.out.println("Printing end. ");
+	}
+
+	// Solved A
+
+	/*
+	 * Pass in the head of the linked list and the value to partition around
+	 */
+	public static LinkedListNode partitionS(LinkedListNode node, int x) {
+		LinkedListNode beforeStart = null;
+		LinkedListNode beforeEnd = null;
+		LinkedListNode afterStart = null;
+		LinkedListNode afterEnd = null;
+
+		/* Partition list */
+		while (node != null) {
+			LinkedListNode next = node.next;
+			node.next = null;
+			if (node.data < x) {
+				/* Insert node into end of before list */
+				if (beforeStart == null) {
+					beforeStart = node;
+					beforeEnd = beforeStart;
+				} else {
+					beforeEnd.next = node;
+					beforeEnd = node;
+				}
+			} else {
+				/* Insert node into end of after list */
+				if (afterStart == null) {
+					afterStart = node;
+					afterEnd = afterStart;
+				} else {
+					afterEnd.next = node;
+					afterEnd = node;
+				}
+			}
+			node = next;
+		}
+
+		if (beforeStart == null) {
+			return afterStart;
+		}
+
+		/* Merge before list and after list */
+		beforeEnd.next = afterStart;
+		return beforeStart;
+	}
+
+	// Solved B
+
+	public static LinkedListNode partitionSII(LinkedListNode node, int x) {
+		LinkedListNode beforeStart = null;
+		LinkedListNode afterStart = null;
+
+		/* Partition list */
+		while (node != null) {
+			LinkedListNode next = node.next;
+			if (node.data < x) {
+				/* Insert node into start of before list */
+				node.next = beforeStart;
+				beforeStart = node;
+			} else {
+				/* Insert node into front of after list */
+				node.next = afterStart;
+				afterStart = node;
+			}
+			node = next;
+		}
+
+		/* Merge before list and after list */
+
+		if (beforeStart == null) {
+			return afterStart;
+		}
+
+		/* Find end of before list, and merge the lists */
+		LinkedListNode head = beforeStart;
+		while (beforeStart.next != null) {
+			beforeStart = beforeStart.next;
+		}
+		beforeStart.next = afterStart;
+
+		return head;
 	}
 
 }
