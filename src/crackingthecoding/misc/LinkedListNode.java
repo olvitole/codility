@@ -3,6 +3,10 @@ package crackingthecoding.misc;
 public class LinkedListNode {
 	public LinkedListNode next = null;
 	public int data;
+	
+	// 	used in 2.5
+	public LinkedListNode prev = null;
+
 
 	public LinkedListNode(int d) {
 		data = d;
