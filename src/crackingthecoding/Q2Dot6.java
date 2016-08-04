@@ -102,5 +102,8 @@ public class Q2Dot6 {
 		int count;
 
 	}
+	
+	
+	// Solution on book same as mine
 
 }
