@@ -20,6 +20,14 @@ public class LinkedListNode {
 		}
 		n.next = end;
 	}
+	
+	public void appendToTail(LinkedListNode d) {
+		LinkedListNode n = this;
+		while (n.next != null) {
+			n = n.next;
+		}
+		n.next = d;
+	}
 
 	@Override
 	public String toString() {
