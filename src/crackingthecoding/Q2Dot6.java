@@ -25,8 +25,9 @@ public class Q2Dot6 {
 
 	private static void append(LinkedListNode nd) {
 		nd.appendToTail(2);
+		//nd.appendToTail(6);
 		nd.appendToTail(2);
-		nd.appendToTail(1);
+		//nd.appendToTail(1);
 		nd.appendToTail(1);
 	}
 
@@ -58,7 +59,7 @@ public class Q2Dot6 {
 
 		count = count / 2;
 
-		while (nd != null && i < count / 2) { // no need to check reversed due
+		while (nd != null && i < count) { // no need to check reversed due
 												// to
 												// same lenght
 			if (nd.data != reversed.data)
@@ -76,18 +77,19 @@ public class Q2Dot6 {
 		Result rs = new Result();
 
 		LinkedListNode reversed = null;
-		LinkedListNode reversedPre = null;
 
 		int count = 0;
 
 		while (nd != null) {
-			reversed = nd;
+			LinkedListNode n = new LinkedListNode(nd.data); // Clone
+			n.next = reversed;
+			reversed = n;
 			nd = nd.next;
-			reversed.next = reversedPre;
-			reversedPre = reversed;
 			count++;
 		}
 
+		print(reversed);
+		
 		rs.count = count;
 		rs.nd = reversed;
 
