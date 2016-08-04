@@ -33,9 +33,14 @@ public class Q2Dot7 {
 		print(one);
 		print(two);
 		Q2Dot7 prob = new Q2Dot7();
+
 		LinkedListNode node = prob.intersect(one, two);
 		System.out.println("Answer: ");
 		print(node);
+
+		LinkedListNode node2 = prob.findintersection(one, two);
+		System.out.println("Answer2: ");
+		print(node2);
 
 	}
 
@@ -97,5 +102,69 @@ public class Q2Dot7 {
 	}
 
 	// Solution on book same as mine
+
+	// Solution A
+
+	LinkedListNode findintersection(LinkedListNode listl, LinkedListNode list2) {
+		if (listl == null || list2 == null)
+			return null;
+
+		/* Get tail and sizes. */
+		Result resultl = getTailAndSize(listl);
+		Result result2 = getTailAndSize(list2);
+		/* If different tail nodes, then there's no intersection. */
+		if (resultl.tail != result2.tail) {
+			return null;
+		}
+		/* Set pointers to the start of each linked list. */
+		LinkedListNode shorter = resultl.size < result2.size ? listl : list2;
+		LinkedListNode longer = resultl.size < result2.size ? list2 : listl;
+		/*
+		 * Advance the pointer for the longer linked list by difference in
+		 * lengths.
+		 */
+		longer = getKthNode(longer, Math.abs(resultl.size - result2.size));
+		/* Move both pointers until you have a collision. */
+		while (shorter != longer) {
+
+			shorter = shorter.next;
+			longer = longer.next;
+		}
+		/* Return either one. */
+		return longer;
+
+	}
+
+	class Result {
+		public LinkedListNode tail;
+		public int size;
+
+		public Result(LinkedListNode tail, int size) {
+			this.tail = tail;
+			this.size = size;
+		}
+	}
+
+	Result getTailAndSize(LinkedListNode list) {
+		if (list == null)
+			return null;
+
+		int size = 1;
+		LinkedListNode current = list;
+		while (current.next != null) {
+			size++;
+			current = current.next;
+		}
+		return new Result(current, size);
+	}
+
+	LinkedListNode getKthNode(LinkedListNode head, int k) {
+		LinkedListNode current = head;
+		while (k > 0 && current != null) {
+			current = current.next;
+			k--;
+		}
+		return current;
+	}
 
 }
