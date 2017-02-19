@@ -5,7 +5,7 @@ import java.util.Arrays;
 // check if the sum of three elements of an array is equal to n
 public class SumOfThree {
 
-	// sum of three numbers from the array adds up to n
+	// sum of three numbers from the array adds up to sum
 
 	private static boolean hasSum(int arr[], int sum) {
 
@@ -16,9 +16,9 @@ public class SumOfThree {
 			int r = arr.length - 1;
 
 			while (l < r) {
-				int ts = arr[l] + arr[i] + arr[i] + arr[r];
+				int ts = arr[l] + arr[i] + arr[r];
 				if (ts == sum) {
-					System.out.println("Found: " + arr[l] + " " + arr[i] + " " + arr[i] + " " + arr[r]);
+					System.out.println("Found: " + arr[l] + " " + arr[i] + " " + arr[r]);
 					return true;
 				} else if (ts < sum) {
 					l++;
@@ -33,7 +33,7 @@ public class SumOfThree {
 
 	// Driver prorgram
 	public static void main(String args[]) {
-		int arr[] = { 1, 3, 5, 2, 4, 2, 5 };
+		int arr[] = { 3, 1, 2, 4, 2, 9 };
 		int n = 9;
 		boolean sm = hasSum(arr, n);
 		System.out.println(sm);
